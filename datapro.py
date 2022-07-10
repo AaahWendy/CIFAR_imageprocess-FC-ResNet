@@ -119,13 +119,18 @@ def Imageprocess(path):
         # 高斯模糊
         img_gu = cv2.GaussianBlur(np.array(im_inverted), (5 ,5),0)
 
-        noise = np.random.normal(0,10, img_gu.shape)
+        #高斯噪声
+
+
+        # sig = random(0, 50)
+        # np.random.shuffle(sig)
+        noise = np.random.normal(0,0, img_gu.shape)
         Gimg = img_gu.astype(np.float)
         Gimg = Gimg + noise
         Gimg = np.clip(Gimg, 0, 255)
         GuassImg = Gimg.astype(np.uint8)
 
-
+        #x和y梯度
         sobelx = cv2.Sobel(GuassImg, cv2.CV_64F, 1, 0, ksize=3)
         sobelx = cv2.convertScaleAbs(sobelx)
         sobely = cv2.Sobel(GuassImg, cv2.CV_64F, 0, 1, ksize=3)
@@ -141,6 +146,7 @@ def Imageprocess(path):
         # img = cv2.bitwise_not(sobelxy2)
         cv2.imwrite(path,sobelxy2 )
         print(path)
+
         # plt.subplot(2, 3, 1), plt.title('original')
         # plt.imshow(original)
         # plt.subplot(2, 3, 2), plt.title('invert')
@@ -170,12 +176,18 @@ if __name__ == '__main__':
     start = time.time()
     # data to image
 
-    ToImage('./data/cifar-10-batches-py')
-    print("success to image")
+    # ToImage('./data/cifar-10-batches-py')
+    # print("success to image")
+    #
+    # divided();
+    # print("Finish divide")
 
-    divided();
-    print("Finish divide")
-
+    # path = './ceshi'
+    # img_path = findAllFile(path)
+    # pool = Pool(6)
+    # pool.map(Imageprocess, img_path)
+    # pool.close()
+    # pool.join()
     path = './train'
     img_path = findAllFile(path)
     pool = Pool(6)
