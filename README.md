@@ -10,5 +10,7 @@ FC.py
 ![image](https://github.com/AaahWendy/CIFAR_imageprocess-and-FC/blob/master/ceshi/loss.png)  
 验证集的准确度图像如下  
 ![image](https://github.com/AaahWendy/CIFAR_imageprocess-and-FC/blob/master/ceshi/accuarcy.png)  
+test.py  
+读取训练的网络，在测试集上测试  
 测试集上的表现如下图  
 ![image](https://github.com/AaahWendy/CIFAR_imageprocess-and-FC/blob/master/ceshi/test.png)  
