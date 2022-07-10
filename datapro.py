@@ -176,11 +176,11 @@ if __name__ == '__main__':
     start = time.time()
     # data to image
 
-    # ToImage('./data/cifar-10-batches-py')
-    # print("success to image")
-    #
-    # divided();
-    # print("Finish divide")
+    ToImage('./data/cifar-10-batches-py')
+    print("success to image")
+
+    divided();
+    print("Finish divide")
 
     # path = './ceshi'
     # img_path = findAllFile(path)

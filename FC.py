@@ -1,8 +1,5 @@
 import os
 
-from torch import nn
-from torch.autograd import Variable
-
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
 import torchvision
@@ -88,10 +85,7 @@ def train(epoch):
             running_loss = 0.0
     print('[%d]train loss:%.3f' % (epoch+1,sum_loss /len(trainloader)))
     traincost.append( sum_loss / len(trainloader))
-    # print('Finished Training')
-    # torch.save(model, 'net.pkl')  # 保存整个神经网络的结构和模型参数
     torch.save({'state_dict': model.state_dict()}, 'net.pth.tar')
-    # torch.save(model.state_dict(), 'net_params.pkl')  # 只保存神经网络的模型参数
 
 
 
@@ -117,16 +111,6 @@ def test(epoch):
             outputs = model(images)
             loss = criterion(outputs, labels)
             running_loss += loss.item()
-
-            # for label, prediction in zip(labels, predicted):
-            #     if label == prediction:
-            #         correct_pred[classes[label]] += 1
-            #     total_pred[classes[label]] += 1
-            # # print accuracy for each class
-            # for classname, correct_count in correct_pred.items():
-            #     accuracy = 100 * float(correct_count) / total_pred[classname]
-            #     listacc.append(accuarcy)
-            #     print(f'Accuracy for class: {classname:5s} is {accuracy:.1f} %')
 
         print('[%d] Val loss:%.3f' % (epoch+1,running_loss / len(valloader)))
         valcost.append(running_loss/len(valloader))
@@ -154,42 +138,4 @@ if __name__ == '__main__':
     plt.plot(acc)
     plt.title(' accaurcy')
     plt.show()
-
-    # running_loss = 0.0
-    # correct = 0
-    # total = 0
-    # listacc = []
-    # correct_pred = {classname: 0 for classname in classes}
-    # total_pred = {classname: 0 for classname in classes}
-    # with torch.no_grad():
-    #     for data in testloader:
-    #         images, labels = data
-    #         if torch.cuda.is_available():
-    #             images = images.cuda()
-    #             labels = labels.cuda()
-    #         outputs = model(images)
-    #         _, predicted = torch.max(outputs.data, dim=1)
-    #         total += labels.size(0)
-    #         correct += (predicted == labels).sum().item()
-    #         outputs = model(images)
-    #         loss = criterion(outputs, labels)
-    #         running_loss += loss.item()
-    #         for label, prediction in zip(labels, predicted):
-    #             if label == prediction:
-    #                 correct_pred[classes[label]] += 1
-    #             total_pred[classes[label]] += 1
-    #         # print accuracy for each class
-    #         for classname, correct_count in correct_pred.items():
-    #             accuracy = 100 * float(correct_count) / total_pred[classname]
-    #             listacc.append(accuracy)
-    #             print(f'Accuracy for class: {classname:5s} is {accuracy:.1f} %')
-    #     print('loss on testset:%.3f' % (running_loss / 300))
-    # print('Accuracy on test set:%d %%' % (100 * correct / total))
-    #
-
-
-
-
-
-
 
